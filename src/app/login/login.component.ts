@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+// import { AnyARecord } from 'dns';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +8,46 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
+  accno = "Account number please";
+  pwd = " ";
+  accountDetails:any = {
+    1000: { acno: 1000, actype: "savings", username: "userone", password: "userone", balance: 50000 },
+    1001: { acno: 1001, actype: "savings", username: "usertwo", password: "usertwo", balance: 5000 },
+    1002: { acno: 1002, actype: "current", username: "userthree", password: "userthree", balance: 10000 },
+    1003: { acno: 1003, actype: "current", username: "userfour", password: "userfour", balance: 6000 }
+}
+
   constructor() { }
 
   ngOnInit(): void {
   }
+  // accnoChange(event:any) {
+    // this.accno = event.target.value;
+    // console.log(this.accno);
+    // 
+  // }
+  
+  // pwdChange(event:any){
+    // this.pwd = event.target.value;
+    // console.log(this.pwd);
+    
+  
+  login (a:any,p:any) {
+        let accno = a.value;
+        let paswd = p.value;
+        let users = this.accountDetails;
+        if (accno in users) {
+            if(paswd == users[accno]["password"]) {
+              alert("Login succesful")
 
+            }
+            else {
+              alert("incoorect password");
+            }
+          }
+        else {
+          alert("invalid account")
+        }
+
+}
 }

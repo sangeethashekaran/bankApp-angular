@@ -1,5 +1,5 @@
 #back{
-    background-image: url("D:\Users\user\Desktop\MEAN Stack\Angular\bankApp\src\assets\images\loginimg.jpg");
+
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: top;
@@ -32,8 +32,8 @@ margin-top: 30px;
 border: 1px solid black;
 border-radius: 4px;
 width: 440px;
-height: 400px;
-background-color:#7cc2bb;
+height: 350px;
+background-color:#82c2b2;
 
 
 }
