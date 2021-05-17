@@ -1,25 +1,23 @@
-  
- <div id = "back"></div>
+<div id = "back"></div>
     
- <h1 class="heading">WELCOME TO AXIS BANK</h1>
 
     
   <!-- <div class="form-group"> -->
     <div class= "container">
       <img src = "assets/images/axis.png"><br>
+
       
+      <label for="username" class="font">USERNAME</label>
+      <input id="uname" type="text" class="form-control" [(ngModel)] ="uname" placeholder="Username">
       <label for="accountnum" class="font">ACCOUNT NUMBER</label>
       <input id="acno" type="text" class="form-control"  [(ngModel)]="accno" name="account"placeholder="Enter Account number">
     <!-- <label for="" class="font">USER NAME</label> -->
     <!-- <input id="uname" type="text" class="form-control" (change)="usernameChange($event)" placeholder="Enter username"> -->
-  <!-- </div> -->
-  <!-- <div class="form-group"> -->
+
     <label for="passw" class="font">PASSWORD</label>
     <input id="pwd" type="text" class="form-control" [(ngModel)]="pswd" name="password" placeholder="Password">
-  <!-- </div> -->
-  <button class="btn btn-success" (click)="login()">Login</button>
-  <a href="#" class="link">Forgot password?</a>
-  <button class="btn btn-success" (click)="register()">Create New Account</button>
+  
+  <button class="btn btn-success" (click)="register()">Register</button>
 
   </div>
 
