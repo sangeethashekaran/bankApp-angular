@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
 
   accno = "Account number please";
-  pwd = " ";
+  pswd = " ";
   accountDetails:any = {
     1000: { acno: 1000, actype: "savings", username: "userone", password: "userone", balance: 50000 },
     1001: { acno: 1001, actype: "savings", username: "usertwo", password: "usertwo", balance: 5000 },
@@ -32,9 +32,9 @@ export class LoginComponent implements OnInit {
     // console.log(this.pwd);
     
   
-  login (a:any,p:any) {
-        let accno = a.value;
-        let paswd = p.value;
+  login() {
+        let accno = this.accno;
+        let paswd = this.pswd;
         let users = this.accountDetails;
         if (accno in users) {
             if(paswd == users[accno]["password"]) {
