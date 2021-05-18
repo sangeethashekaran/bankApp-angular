@@ -6,18 +6,20 @@
     <div class= "container">
       <img src = "assets/images/axis.png"><br>
 
-      
+      <form (ngSubmit)="register()">
       <label for="username" class="font">USERNAME</label>
-      <input id="uname" type="text" class="form-control" [(ngModel)] ="uname" placeholder="Username">
+      <input id="uname" type="text" class="form-control" [(ngModel)] ="uname" name="usname" placeholder="Username">
       <label for="accountnum" class="font">ACCOUNT NUMBER</label>
-      <input id="acno" type="text" class="form-control"  [(ngModel)]="accno" name="account"placeholder="Enter Account number">
+      <input id="acno" type="text" class="form-control"  [(ngModel)]="acno" name="account" placeholder="Enter Account number">
     <!-- <label for="" class="font">USER NAME</label> -->
     <!-- <input id="uname" type="text" class="form-control" (change)="usernameChange($event)" placeholder="Enter username"> -->
 
     <label for="passw" class="font">PASSWORD</label>
     <input id="pwd" type="text" class="form-control" [(ngModel)]="pswd" name="password" placeholder="Password">
   
-  <button class="btn btn-success" (click)="register()">Register</button>
+  <input type = "submit" class="btn btn-success" value="Register">
+  <a routerLink="">Login</a>          
+  </form>
 
   </div>
 
