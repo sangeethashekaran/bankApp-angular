@@ -46,6 +46,49 @@ export class DataService {
     }
   }
 
+  deposit(accno:any,pswd:any,amt:any) {
+    var amount = parseInt(amt);
+    var users = this.accountDetails;
+    if(accno in users) {
+      if(pswd=users[accno]["password"]) {
+        users[accno]["balance"]+=amount;
+        return users[accno]["balance"];
+      }
+      else {
+        alert("Incorrect password");
+        return false;
+      }
+    }
+    else {
+      alert("invalid account");
+      return false;
+    }
+  }
+
+  withdraw(accno:any,pswd:any,amt:any) {
+    var amount=parseInt(amt);
+    var users=this.accountDetails;
+    if(accno in users) {
+      if(pswd=users[accno]["password"]) {
+        if(users[accno]["balance"]>amount) {
+          users[accno]["balance"]-=amount;
+          return users[accno]["balance"];
+        }
+        else {
+          alert("Insufficient balance");
+          return false;
+        }
+    }
+    else{
+    alert("incorrect password")
+    }
+  }
+  else {
+    alert("Invalid account")
+  }
+
+  }
+
 
 
   }

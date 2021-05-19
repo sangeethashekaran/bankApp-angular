@@ -1,28 +1,28 @@
 <h1>WELCOME USER</h1>
 
-<form action="#">
+<form (ngSubmit) = "deposit()">
     <div class="container">
         <h5>Deposit Form</h5>
         <label for="" class="font">Account Number</label>
-        <input type="text" class="form-control" [(ngModel)] = "uname" name="acnum"  placeholder="Enter Account number">
+        <input type="text" class="form-control" [(ngModel)] = "dAccno" name="acnum"  placeholder="Enter Account number">
         <label for="" class="font">Password</label>
-        <input type="password" id="pwd" class="form-control" [(ngModel)] = "pswd" name="password"  placeholder="Password">
+        <input type="password" id="pwd" class="form-control" [(ngModel)] = "dPswd" name="password"  placeholder="Password">
         <label for="" class="font">Amount</label>
-        <input type="number" class="form-control" [(ngModel)] = "amount" name="withdraw" placeholder = "Enter the amount">
+        <input type="number" class="form-control" [(ngModel)] = "dAmount" name="withdraw" placeholder = "Enter the amount">
         <input type="submit" class="btn btn-warning" value="Deposit">
 
     </div>
 </form>
 
-<form action="#">
+<form (ngSubmit)="withdraw()">
     <div class="container">
          <h5>Withdrawal Form</h5>
-        <label for="">User Name</label>
-        <input type="text" class="form-control" [(ngModel)] = "uname" name="usname"  placeholder="Enter username">
+        <label for="">Account number</label>
+        <input type="text" class="form-control" [(ngModel)] = "wAccno" name="accno"  placeholder="Enter accountnumber">
         <label for="">Password</label>
-        <input type="password" id="pwd" class="form-control" [(ngModel)] = "pswd" name="password"  placeholder="Password">
+        <input type="password" id="pwd" class="form-control" [(ngModel)] = "wPswd" name="password"  placeholder="Password">
         <label for="">Amount</label>
-        <input type="number" class="form-control" [(ngModel)] = "amount" name="withdraw" placeholder = "Enter the amount">
+        <input type="number" class="form-control" [(ngModel)] = "wAmount" name="amount" placeholder = "Enter the amount">
         <input type="submit" class="btn btn-warning" value="Withdraw">
 
     </div>
