@@ -1,5 +1,6 @@
 import { registerLocaleData } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 
@@ -14,9 +15,14 @@ export class LoginComponent implements OnInit {
 
   accno = "Account number please";
   pswd = "";
+
+  loginForm = this.fb.group({
+    accno:['', [Validators.required, Validators.pattern('[0-9]*')]],
+    pswd:['',[Validators.required,Validators.pattern('[a-zA-z0-9]*')]]
+  })
   
 
-  constructor(private router: Router,private dataService:DataService) { }
+  constructor(private router: Router,private dataService:DataService, private fb:FormBuilder) { }
 
   ngOnInit(): void {
   }
@@ -32,8 +38,9 @@ export class LoginComponent implements OnInit {
 
 
   login() {
-    let accno = this.accno;
-    let pswd = this.pswd;
+    if(this.loginForm.valid) {
+    let accno = this.loginForm.value.accno;
+    let pswd = this.loginForm.value.pswd;
     const result = this.dataService.login(accno,pswd);
     if(result) {
       alert("login success")
@@ -42,6 +49,10 @@ export class LoginComponent implements OnInit {
     
     
  }
+ else {
+   alert("form is invalid")
+ }
+}
  register() {
    this.router.navigateByUrl("register")                //dependency injection
  }

@@ -4,13 +4,26 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class DataService {
+
+  
   accountDetails: any = {
     1000: { acno: 1000, actype: "savings", username: "userone", password: "userone", balance: 50000 },
     1001: { acno: 1001, actype: "savings", username: "usertwo", password: "usertwo", balance: 5000 },
     1002: { acno: 1002, actype: "current", username: "userthree", password: "userthree", balance: 10000 },
     1003: { acno: 1003, actype: "current", username: "userfour", password: "userfour", balance: 6000 }
   }
-  constructor() { }
+  
+  constructor() {
+  }
+
+  // saveDetails() {
+    // localStorage.setItem("accountDetails",JSON.stringify(this.accountDetails))
+    // localStorage.setItem("this.currentUser",JSON.stringify(this.currentUser))
+  // }
+  // getDetails() {
+    // JSON.parse(localStorage.getItem("accountDetails"));
+    // JSON.parse(localStorage.)
+  // }
   
   register(uname:any,acno:any,pswd:any) {
     let user = this.accountDetails; //database
@@ -33,6 +46,7 @@ export class DataService {
     let users = this.accountDetails;
     if(accno in users){
        if(pswd==users[accno]["password"]) {
+        //  this.currentUser=users[accno]["username"]
          return true;
          }
        else {
@@ -48,11 +62,11 @@ export class DataService {
 
   deposit(accno:any,pswd:any,amt:any) {
     var amount = parseInt(amt);
-    var users = this.accountDetails;
-    if(accno in users) {
-      if(pswd=users[accno]["password"]) {
-        users[accno]["balance"]+=amount;
-        return users[accno]["balance"];
+    let user = this.accountDetails;
+    if(accno in user) {
+      if(pswd==user[accno]["password"]) {
+        user[accno]["balance"]+=amount;
+        return user[accno]["balance"];
       }
       else {
         alert("Incorrect password");
@@ -67,9 +81,13 @@ export class DataService {
 
   withdraw(accno:any,pswd:any,amt:any) {
     var amount=parseInt(amt);
-    var users=this.accountDetails;
+    console.log(accno,pswd);
+    
+    let users=this.accountDetails;
+    console.log(users[accno]["password"]);
+    
     if(accno in users) {
-      if(pswd=users[accno]["password"]) {
+      if(pswd==users[accno]["password"]) {
         if(users[accno]["balance"]>amount) {
           users[accno]["balance"]-=amount;
           return users[accno]["balance"];
@@ -80,11 +98,13 @@ export class DataService {
         }
     }
     else{
-    alert("incorrect password")
+    alert("incorrect password");
+    return false;
     }
   }
   else {
-    alert("Invalid account")
+    alert("Invalid account");
+    return false;
   }
 
   }

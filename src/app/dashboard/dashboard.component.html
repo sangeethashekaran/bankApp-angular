@@ -1,28 +1,35 @@
-<h1>WELCOME USER</h1>
+<h1>WELCOME User</h1>
 
-<form (ngSubmit) = "deposit()">
-    <div class="container">
+<form [formGroup]= "depositForm" (ngSubmit) = "deposit()">
+    <div class="container box">
         <h5>Deposit Form</h5>
         <label for="" class="font">Account Number</label>
-        <input type="text" class="form-control" [(ngModel)] = "dAccno" name="acnum"  placeholder="Enter Account number">
+        <input type="text" class="form-control" formControlName= "dAccno" name="acnum"  placeholder="Enter Account number">
+        <div *ngIf= "(depositForm.get('dAccno')?.touched || depositForm.get('dAccno')?.dirty)&& depositForm.get('dAccno')?.errors" class="error">Invalid Account number</div>
         <label for="" class="font">Password</label>
-        <input type="password" id="pwd" class="form-control" [(ngModel)] = "dPswd" name="password"  placeholder="Password">
+        <input type="password" id="pawss" class="form-control" formControlName = "dPswd" name="password"  placeholder="Password">
+        <div *ngIf= "(depositForm.get('dPswd')?.touched || depositForm.get('dPswd')?.dirty)&& depositForm.get('dPswd')?.errors" class="error">Invalid Password</div>
         <label for="" class="font">Amount</label>
-        <input type="number" class="form-control" [(ngModel)] = "dAmount" name="withdraw" placeholder = "Enter the amount">
+        <input type="number" class="form-control" formControlName = "dAmount" name="amount" placeholder = "Enter the amount">
+        <div *ngIf= "(depositForm.get('dAmount')?.touched || depositForm.get('dAmount')?.dirty)&& depositForm.get('dAmount')?.errors" class="error">Invalid Amount</div>
         <input type="submit" class="btn btn-warning" value="Deposit">
 
     </div>
 </form>
 
-<form (ngSubmit)="withdraw()">
-    <div class="container">
+<form [formGroup]="withdrawForm" (ngSubmit)="withdraw()">
+    <div class="container box">
          <h5>Withdrawal Form</h5>
         <label for="">Account number</label>
-        <input type="text" class="form-control" [(ngModel)] = "wAccno" name="accno"  placeholder="Enter accountnumber">
+        <input type="text" class="form-control" formControlName = "wAccno" name="accno"  placeholder="Enter accountnumber">
+        <div *ngIf= "(withdrawForm.get('wAccno')?.touched || withdrawForm.get('wAccno')?.dirty)&& withdrawForm.get('wAccno')?.errors" class="error">Invalid Account number</div>
         <label for="">Password</label>
-        <input type="password" id="pwd" class="form-control" [(ngModel)] = "wPswd" name="password"  placeholder="Password">
+        <input type="password" id="pwd" class="form-control" formControlName = "wPswd" name="password"  placeholder="Password">
+        <div *ngIf= "(withdrawForm.get('wPswd')?.touched || withdrawForm.get('wPswd')?.dirty)&& withdrawForm.get('wPswd')?.errors" class="error">Invalid Password</div>
+        
         <label for="">Amount</label>
-        <input type="number" class="form-control" [(ngModel)] = "wAmount" name="amount" placeholder = "Enter the amount">
+        <input type="number" class="form-control" formControlName = "wAmount" name="amount" placeholder = "Enter the amount">
+        <div *ngIf= "(withdrawForm.get('wAmount')?.touched || withdrawForm.get('wAmount')?.dirty)&& withdrawForm.get('wAmount')?.errors" class="error">Invalid Amount</div>
         <input type="submit" class="btn btn-warning" value="Withdraw">
 
     </div>

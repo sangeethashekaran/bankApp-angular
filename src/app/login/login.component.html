@@ -1,27 +1,30 @@
   
- <div class="bg-div"></div>
+ <div class="bg-div">
     
  <h1 class="heading">WELCOME TO AXIS BANK</h1>
 
     
   <!-- <div class="form-group"> -->
-    <form (ngSubmit)="login()">
+    
     <div class= "container">
       <img src = "assets/images/axis.png"><br>
-      <form (ngSubmit)="login()">
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
       <label for="accountnum" class="font">ACCOUNT NUMBER</label>
-      <input id="acno" type="text" class="form-control"  [(ngModel)]="accno" name="account" placeholder="Enter Account number">
+      <input id="acno" type="text" class="form-control"  formControlName="accno" name="account" placeholder="Enter Account number">
+      <div *ngIf= "(loginForm.get('accno')?.touched || loginForm.get('accno')?.dirty)&& loginForm.get('accno')?.errors "class="error">Invalid Account number</div>
     <!-- <label for="" class="font">USER NAME</label> -->
     <!-- <input id="uname" type="text" class="form-control" (change)="usernameChange($event)" placeholder="Enter username"> -->
   <!-- </div> -->
   <!-- <div class="form-group"> -->
     <label for="passw" class="font">PASSWORD</label>
-    <input id="pwd" type="text" class="form-control" [(ngModel)]="pswd" name="password" placeholder="Password">
+    <input id="pwd" type="text" class="form-control" formControlName="pswd" name="password" placeholder="Password">
+    <div *ngIf= "(loginForm.get('pswd')?.touched || loginForm.get('pswd')?.dirty)&& loginForm.get('pswd')?.errors "class="error">Invalid Password</div>
   <!-- </div> -->
   <input type="submit" class="btn btn-success" value="Login">
   <a href="#" class="link">Forgot password?</a>
   <button class="btn btn-success" (click)="register()">Create New Account</button>
   </form>
 
+  </div>
   </div>
 
