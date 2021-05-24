@@ -9,7 +9,6 @@ import { DataService } from '../services/data.service';
 })
 export class DashboardComponent implements OnInit {
 
-  // currentUser = this.dataService.currentUser;
 
   depositForm = this.fb.group({
     dAccno: ['', [Validators.required, Validators.pattern('[0-9]*')]],
@@ -22,6 +21,8 @@ export class DashboardComponent implements OnInit {
     wPswd: ['', [Validators.required,Validators.pattern('[a-zA-Z0-9]*')]],
     wAmount: ['', [Validators.required, Validators.pattern('[0-9]*')]]
   })
+   
+  user=this.dataService.currentUser;             //current username
   constructor(private dataService: DataService, private fb: FormBuilder) { }
 
   ngOnInit(): void {

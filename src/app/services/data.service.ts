@@ -5,7 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class DataService {
 
-  
+   currentUser="";                //name of current user
+
   accountDetails: any = {
     1000: { acno: 1000, actype: "savings", username: "userone", password: "userone", balance: 50000 },
     1001: { acno: 1001, actype: "savings", username: "usertwo", password: "usertwo", balance: 5000 },
@@ -14,16 +15,27 @@ export class DataService {
   }
   
   constructor() {
+    this.getDetails();                  //In a class,constructor method will be run firstly
   }
 
-  // saveDetails() {
-    // localStorage.setItem("accountDetails",JSON.stringify(this.accountDetails))
-    // localStorage.setItem("this.currentUser",JSON.stringify(this.currentUser))
-  // }
-  // getDetails() {
-    // JSON.parse(localStorage.getItem("accountDetails"));
-    // JSON.parse(localStorage.)
-  // }
+  saveDetails() {                                 //database  and currentuser storing in local storage
+    localStorage.setItem("accountDetails",JSON.stringify(this.accountDetails));
+    if(this.currentUser) {            
+    localStorage.setItem("currentUser",JSON.stringify(this.currentUser));
+    }
+  }
+
+  getDetails() {
+    if(localStorage.getItem("accountDetails")) {
+    this.accountDetails=JSON.parse(localStorage.getItem("accountDetails"));
+    }
+
+    if(localStorage.getItem("currentUser")) {       //if currentUser is presnt in localstorage
+    this.currentUser=JSON.parse(localStorage.getItem("currentUser"));
+    }
+  }
+
+  
   
   register(uname:any,acno:any,pswd:any) {
     let user = this.accountDetails; //database
@@ -37,6 +49,7 @@ export class DataService {
         password:pswd,
         balance: 0
       }
+        this.saveDetails();            //calling function
         return true;
         
     }
@@ -46,7 +59,8 @@ export class DataService {
     let users = this.accountDetails;
     if(accno in users){
        if(pswd==users[accno]["password"]) {
-        //  this.currentUser=users[accno]["username"]
+         this.currentUser=users[accno]["username"]; //accesing current username
+         this.saveDetails();                          //calling saveDetails function
          return true;
          }
        else {
@@ -66,6 +80,7 @@ export class DataService {
     if(accno in user) {
       if(pswd==user[accno]["password"]) {
         user[accno]["balance"]+=amount;
+        this.saveDetails();
         return user[accno]["balance"];
       }
       else {
@@ -90,6 +105,7 @@ export class DataService {
       if(pswd==users[accno]["password"]) {
         if(users[accno]["balance"]>amount) {
           users[accno]["balance"]-=amount;
+          this.saveDetails();
           return users[accno]["balance"];
         }
         else {
@@ -113,4 +129,8 @@ export class DataService {
 
   }
 
+
+function J(arg0: string, J: any) {
+  throw new Error('Function not implemented.');
+}
 
