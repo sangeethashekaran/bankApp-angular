@@ -10,8 +10,8 @@
       <img src = "assets/images/axis.png"><br>
       <form [formGroup]="loginForm" (ngSubmit)="login()">
       <label for="accountnum" class="font">ACCOUNT NUMBER</label>
-      <input id="acno" type="text" class="form-control"  formControlName="accno" name="account" placeholder="Enter Account number">
-      <div *ngIf= "(loginForm.get('accno')?.touched || loginForm.get('accno')?.dirty)&& loginForm.get('accno')?.errors "class="error">Invalid Account number</div>
+      <input type="text" class="form-control"  formControlName="acno" name="account" placeholder="Enter Account number">
+      <div *ngIf= "(loginForm.get('acno')?.touched || loginForm.get('acno')?.dirty)&& loginForm.get('acno')?.errors "class="error">Invalid Account number</div>
     <!-- <label for="" class="font">USER NAME</label> -->
     <!-- <input id="uname" type="text" class="form-control" (change)="usernameChange($event)" placeholder="Enter username"> -->
   <!-- </div> -->

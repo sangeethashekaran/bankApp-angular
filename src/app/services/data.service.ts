@@ -1,11 +1,19 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {environment} from '../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class DataService {
 
-   currentUser="";                //name of current user
+   currentUser="";              //name of current user
+   options={
+     withCredentials:true
+   }
 
   accountDetails: any = {
     1000: { acno: 1000, actype: "savings", username: "userone", password: "userone", balance: 50000 },
@@ -14,7 +22,7 @@ export class DataService {
     1003: { acno: 1003, actype: "current", username: "userfour", password: "userfour", balance: 6000 }
   }
   
-  constructor() {
+  constructor(private http:HttpClient) {
     this.getDetails();                  //In a class,constructor method will be run firstly
   }
 
@@ -38,95 +46,123 @@ export class DataService {
   
   
   register(uname:any,acno:any,pswd:any) {
-    let user = this.accountDetails; //database
-    if(acno in user) {
-    return false;
+    
+    const data={
+      uname,
+      acno,
+      pswd
     }
-    else {              //pushin to database
-      user[acno]={
-        acno,
-        username: uname,
-        password:pswd,
-        balance: 0
-      }
-        this.saveDetails();            //calling function
-        return true;
+
+     return this.http.post(environment.apiUrl+"/register",data)   //calling api  //req to server
+    // let user = this.accountDetails; //database
+    // if(acno in user) {
+    // return false;
+    // }
+    // else {              //pushin to database
+    //   user[acno]={
+    //     acno,
+    //     username: uname,
+    //     password:pswd,
+    //     balance: 0
+    //   }
+    //     this.saveDetails();            //calling function
+    //     return true;
         
-    }
+    // }
   }
 
-  login(accno:any,pswd:any) {
-    let users = this.accountDetails;
-    if(accno in users){
-       if(pswd==users[accno]["password"]) {
-         this.currentUser=users[accno]["username"]; //accesing current username
-         this.saveDetails();                          //calling saveDetails function
-         return true;
-         }
-       else {
-         alert("incorrect password")
-         return false;
-       }
+  login(acno:any,pswd:any) {
+    const data={
+      acno,
+      pswd
     }
-    else {
-      alert("invalid account")
-      return false;
-    }
+
+     return this.http.post(environment.apiUrl+"/login",data,this.options)   //calling api  //req to server
+    // let users = this.accountDetails;
+    // if(accno in users){
+    //    if(pswd==users[accno]["password"]) {
+    //      this.currentUser=users[accno]["username"]; //accesing current username
+    //      this.saveDetails();                          //calling saveDetails function
+    //      return true;
+    //      }
+    //    else {
+    //      alert("incorrect password")
+    //      return false;
+    //    }
+    // }
+    // else {
+    //   alert("invalid account")
+    //   return false;
+    // }
   }
 
-  deposit(accno:any,pswd:any,amt:any) {
-    var amount = parseInt(amt);
-    let user = this.accountDetails;
-    if(accno in user) {
-      if(pswd==user[accno]["password"]) {
-        user[accno]["balance"]+=amount;
-        this.saveDetails();
-        return user[accno]["balance"];
-      }
-      else {
-        alert("Incorrect password");
-        return false;
-      }
+  deposit(acno:any,pswd:any,amount:any) {
+
+    // var amount = parseInt(amt);
+    const data={
+      acno,
+      pswd,
+      amount
     }
-    else {
-      alert("invalid account");
-      return false;
-    }
+    return this.http.post(environment.apiUrl+"/deposit",data,this.options) 
+    // let user = this.accountDetails;
+    // if(accno in user) {
+    //   if(pswd==user[accno]["password"]) {
+    //     user[accno]["balance"]+=amount;
+    //     this.saveDetails();
+    //     return user[accno]["balance"];
+    //   }
+    //   else {
+    //     alert("Incorrect password");
+    //     return false;
+    //   }
+    // }
+    // else {
+    //   alert("invalid account");
+    //   return false;
+    // }
   }
 
-  withdraw(accno:any,pswd:any,amt:any) {
-    var amount=parseInt(amt);
-    console.log(accno,pswd);
+  withdraw(acno:any,pswd:any,amount:any) {
+    // var amount=parseInt(amt);
+
+    const data={
+      acno,
+      pswd,
+      amount
+    }
+    return this.http.post(environment.apiUrl+"/withdraw",data,this.options)
+  //   console.log(accno,pswd);
     
-    let users=this.accountDetails;
-    console.log(users[accno]["password"]);
+  //   let users=this.accountDetails;
+  //   console.log(users[accno]["password"]);
     
-    if(accno in users) {
-      if(pswd==users[accno]["password"]) {
-        if(users[accno]["balance"]>amount) {
-          users[accno]["balance"]-=amount;
-          this.saveDetails();
-          return users[accno]["balance"];
-        }
-        else {
-          alert("Insufficient balance");
-          return false;
-        }
-    }
-    else{
-    alert("incorrect password");
-    return false;
-    }
-  }
-  else {
-    alert("Invalid account");
-    return false;
-  }
+  //   if(accno in users) {
+  //     if(pswd==users[accno]["password"]) {
+  //       if(users[accno]["balance"]>amount) {
+  //         users[accno]["balance"]-=amount;
+  //         this.saveDetails();
+  //         return users[accno]["balance"];
+  //       }
+  //       else {
+  //         alert("Insufficient balance");
+  //         return false;
+  //       }
+  //   }
+  //   else{
+  //   alert("incorrect password");
+  //   return false;
+  //   }
+  // }
+  // else {
+  //   alert("Invalid account");
+  //   return false;
+  // }
 
   }
-
-
-
+  deleteAccDetails(acno:any){
+    return this.http.delete(environment.apiUrl+"/deleteAccDetails/"+acno,this.options)
+  }
   }
 
 

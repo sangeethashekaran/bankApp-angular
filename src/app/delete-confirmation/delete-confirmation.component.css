@@ -1,0 +1,12 @@
+.iDelete{
+    border:2px solid red;
+    margin-top:20px;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+.popup{
+    width:100px;
+}
+.btn-light{
+    width:100px;
+}

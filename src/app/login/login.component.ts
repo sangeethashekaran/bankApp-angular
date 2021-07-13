@@ -13,11 +13,10 @@ import { DataService } from '../services/data.service';
 })
 export class LoginComponent implements OnInit {
 
-  accno = "Account number please";
-  pswd = "";
+  
 
   loginForm = this.fb.group({
-    accno:['', [Validators.required, Validators.pattern('[0-9]*')]],
+    acno:['', [Validators.required, Validators.pattern('[0-9]*')]],
     pswd:['',[Validators.required,Validators.pattern('[a-zA-z0-9]*')]]
   })
   
@@ -39,16 +38,21 @@ export class LoginComponent implements OnInit {
 
   login() {
     if(this.loginForm.valid) {
-    let accno = this.loginForm.value.accno;
+    let acno = this.loginForm.value.acno;
     let pswd = this.loginForm.value.pswd;
-    const result = this.dataService.login(accno,pswd);
-    if(result) {
-      alert("login success")
-      this.router.navigateByUrl("dashboard")         //navigating to dashboard page
-    }
-    
-    
- }
+    this.dataService.login(acno,pswd)    //asychronus
+    .subscribe((result:any)=>{
+      if(result) {         // if result is true
+        alert(result.message);
+        localStorage.setItem("name",result.name)
+        localStorage.setItem("acno",result.acno)  //cuurent user's acno storing in local storage
+        this.router.navigateByUrl("dashboard");
+      }
+    },
+    (result)=>{
+      alert(result.error.message) // if result false
+    })
+  }
  else {
    alert("form is invalid")
  }

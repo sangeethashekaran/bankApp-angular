@@ -11,7 +11,7 @@
       <input id="uname" type="text" class="form-control" formControlName ="uname" name="usname" placeholder="Username">
       <div *ngIf= "(registerForm.get('uname')?.touched || registerForm.get('uname')?.dirty)&& registerForm.get('uname')?.errors "class="error">Invalid username</div>
       <label for="accountnum" class="font">ACCOUNT NUMBER</label>
-      <input id="acno" type="text" class="form-control"  formControlName="acno" name="account" placeholder="Enter Account number">
+      <input type="text" class="form-control"  formControlName="acno" name="account" placeholder="Enter Account number">
       <div *ngIf= "(registerForm.get('acno')?.touched || registerForm.get('acno')?.dirty)&& registerForm.get('acno')?.errors "class="error">Invalid Account number</div>
     <!-- <label for="" class="font">USER NAME</label> -->
     <!-- <input id="uname" type="text" class="form-control" (change)="usernameChange($event)" placeholder="Enter username"> -->

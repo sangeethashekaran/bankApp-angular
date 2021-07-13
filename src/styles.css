@@ -3,9 +3,10 @@
 .bg-div {
     background-image: url("app/login/loginimg.jpg");
     background-repeat: no-repeat; 
-    background-size: 100%; 
-    background-position: centre; 
-    height:1000px;
+    /* background-size: 100%;  */
+    position: relative;
+    background-size:cover;
+    height:500px;
 }
 
 /* main heading */
@@ -25,6 +26,9 @@ h5 {
     left:120px;
     text-align:centre;
 }
+h6{
+  text-align: center;
+}
 
 /* text input size */
 .form-control {
@@ -41,10 +45,14 @@ h5 {
 width:400px;
 margin-top: 3%;
 }
+.btn-danger{
+  width:430px;
+/* margin-top: 3%; */
+}
 /* form div */
 .container {
 margin-top: 30px;
-border: 1px solid black;
+border: 1px solid lightskyblue;
 border-radius: 4px;
 width: 440px;
 height: 440px;
@@ -81,8 +89,9 @@ h2 {
 .error {
   color:red;
 }
+/* dashboard form */
 .box {
-    height: 370px;
+    height: 350px;
     background-color:whitesmoke; 
 }
 
